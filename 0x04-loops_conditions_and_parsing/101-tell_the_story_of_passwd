@@ -2,7 +2,7 @@
 # this script displays  content of file /etc/passwd
 
 file=/etc/passwd
-while read -r line
+while IFS= read -r line
 do
     echo "The user $(echo "$line" | cut -d ":" -f 1) is part of the \
 $(echo "$line" | cut -d ":" -f 4) gang, lives in \
