@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
 # this script displays the content of current directory in a list format
 
-<<<<<<< HEAD
-for i in $(find . -maxdepth 1 -name '*' | cut -d "-" -f 2)
-=======
-for i in $(find | cut -d "-" -f 2)
->>>>>>> a6d0a195fa4190cab2020aaccea1b8900393590a
+for i in $(find . -maxdepth 1 -printf '%P\n' | cut -d "-" -f 2)
 do
     echo "$i"
 done
