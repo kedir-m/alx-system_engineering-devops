@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-# Sets up an nginx web server
-sudo apt-get install -y nginx
-echo "Hello World!" > /usr/share/nginx/html/index.html
-sudo service nginx restart
