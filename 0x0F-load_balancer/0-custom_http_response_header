@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# This script configurs nginx server with a custom header
+apt-get -y update
+apt-get -y install nginx
+echo "Hello world!" > /var/www/html/index.html
+ufw allow 'Nginx HTTP'
+chmod -R 755 /var/www
+sudo chmod -R 755 /var/www
+echo 'Hello World!' > /var/www/html/index.html
+# configure /redirect_me to another page
+sed -i "/server_name _;/ a\\\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
+echo "Ceci n'est pas une page" > /var/www/html/c_404.html
+sed -i "/redirect_me/a \\\terror_page 404 /c_404.html;" /etc/nginx/sites-available/default
+sed -i "s/include \/etc\/nginx\/sites-enabled\/\*;/include \/etc\/nginx\/sites-enabled\/\*;\n\tadd_header X-Served-By \"$HOSTNAME\";/" /etc/nginx/nginx.conf
+service nginx start
+
