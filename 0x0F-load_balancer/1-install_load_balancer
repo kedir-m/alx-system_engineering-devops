@@ -1,0 +1,19 @@
+# installs haproxy and cofigures it
+apt-get -y update
+apt-get -y install --no-install-recommends software-properties-common
+add-apt-repository -y ppa:vbernat/haproxy-2.7
+apt-get -y install haproxy=2.7.\*
+
+echo "ENABLED=1" > /etc/default/haproxy
+
+echo "
+listen web_and_web2
+	bind *:80
+	mode http
+	balance roundrobin
+	option httpclose
+	option forwardfor
+	server 49397-web-01 100.25.205.6:80 check
+	server 49397-web-02 52.91.118.108:80 check
+" >> /etc/haproxy/haproxy.cfg
+service haproxy restart
