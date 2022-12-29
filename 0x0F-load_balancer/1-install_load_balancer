@@ -8,9 +8,11 @@ apt-get -y install haproxy=2.7.\*
 echo "ENABLED=1" > /etc/default/haproxy
 
 echo "
-listen web_and_web2
+frontend web_and_web2
 	bind *:80
 	mode http
+	default_backend web_servers
+backend web_servers
 	balance roundrobin
 	server web-01 100.25.205.6:80 check
 	server web-02 52.91.118.108:80 check
