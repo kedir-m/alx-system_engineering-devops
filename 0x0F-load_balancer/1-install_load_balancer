@@ -12,8 +12,6 @@ listen web_and_web2
 	bind *:80
 	mode http
 	balance roundrobin
-	option httpclose
-	option forwardfor
 	server 49397-web-01 100.25.205.6:80 check
 	server 49397-web-02 52.91.118.108:80 check
 " >> /etc/haproxy/haproxy.cfg
