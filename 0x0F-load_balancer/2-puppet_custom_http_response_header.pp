@@ -8,11 +8,11 @@ exec {'update':
 
 exec {'install Nginx':
   provider => shell,
-  command  => 'sudo apt-get -y install nginx'
-  before   => Exec['add_header']
+  command  => 'sudo apt-get -y install nginx',
+  before   => Exec['add_header'],
 }
 exec {'add_header':
-  command     => 'sudo sed -i "s/include \/etc\/nginx\/sites-enabled\/\*;/include \/etc\/nginx\/sites-enabled\/\*;\n\tadd_header X-Served-By \"$HOSTNAME\";/" /etc/nginx/nginx.conf'
+  command     => 'sudo sed -i "s/include \/etc\/nginx\/sites-enabled\/\*;/include \/etc\/nginx\/sites-enabled\/\*;\n\tadd_header X-Served-By \"$HOSTNAME\";/" /etc/nginx/nginx.conf',
 
   before      => Exec['restart Nginx'],
 }
