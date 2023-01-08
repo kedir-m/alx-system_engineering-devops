@@ -1,0 +1,14 @@
+frontend web_and_web2
+        bind *:80
+        bind *:443 ssl crt /etc/haproxy/certs/kmsolutions.tech.pem
+        mode http
+        acl letsencrypt-acl path_beg /.well-known/acme-challenge/
+	http-request redirect scheme https unless { ssl_fc }
+        use_backend letsencrypt-backend if letsencrypt-acl
+        default_backend web_servers
+backend web_servers
+        balance roundrobin
+	server web-01 100.25.205.6:80 check
+        server web-02 52.91.118.108:80 check
+backend letsencrypt-backend
+        server letsencrypt 127.0.0.1:54321
