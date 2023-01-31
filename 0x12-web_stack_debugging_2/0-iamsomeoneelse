@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# runs command whoami as another user using sudo.
+
+sudo -u $1 whoami

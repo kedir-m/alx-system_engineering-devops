@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# runs nginx as ngix user and sets it to listen all active ips on port 8080.
+
+sed -i "s/#user www-data/user nginx/" /etc/nginx/nginx.conf
+sed "s/80/8080/" -i /etc/nginx/sites-available/default
+chown nginx:nginx /etc/nginx/nginx.conf
+chmod 644 /etc/nginx/nginx.conf
+pkill apache2
+sudo -u nginx service nginx restart
